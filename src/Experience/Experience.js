@@ -2,6 +2,10 @@ import * as THREE from "three";
 import Sizes from "./Utils/Sizes.js";
 import Time from "./Utils/Time.js";
 import Camera from "./Camera.js";
+import Renderer from "./Renderer.js";
+import World from "./World/World.js";
+import Resources from "./Utils/Resources.js";
+import sources from "./sources.js";
 
 let instance = null;
 
@@ -13,17 +17,22 @@ export default class Experience {
 
     instance = this;
 
+    // options
+    this.canvas = canvas;
+
     // global access
     window.experience = this;
 
     // setup
     this.sizes = new Sizes();
     this.time = new Time();
+    this.resrouces = new Resources(sources);
     this.scene = new THREE.Scene();
     this.camera = new Camera();
+    this.renderer = new Renderer();
 
-    // options
-    this.canvas = canvas;
+    // world setup
+    this.world = new World();
 
     // resize event
     this.sizes.on("resize", () => {
@@ -38,7 +47,11 @@ export default class Experience {
 
   resize() {
     this.camera.resize();
+    this.renderer.resize();
   }
 
-  update() {}
+  update() {
+    this.camera.update();
+    this.renderer.update();
+  }
 }
