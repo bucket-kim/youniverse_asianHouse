@@ -25,8 +25,6 @@ export default class Experience {
     // options
     this.canvas = canvas;
 
-    console.log(this.canvas);
-
     // resize event
     this.sizes.on("resize", () => {
       this.resize();

@@ -9,6 +9,8 @@ export default class Camera {
     this.scene = this.experience.scene;
     this.canvas = this.experience.canvas;
 
+    console.log(this.canvas);
+
     this.setCamera();
     this.setControls();
   }
