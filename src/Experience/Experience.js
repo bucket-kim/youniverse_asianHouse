@@ -26,7 +26,7 @@ export default class Experience {
     // setup
     this.sizes = new Sizes();
     this.time = new Time();
-    this.resrouces = new Resources(sources);
+    this.resources = new Resources(sources);
     this.scene = new THREE.Scene();
     this.camera = new Camera();
     this.renderer = new Renderer();
