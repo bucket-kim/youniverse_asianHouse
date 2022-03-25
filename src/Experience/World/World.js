@@ -22,8 +22,8 @@ export default class World {
       // setup
       this.environment = new Environment();
       this.houseAssets = new HouseAssets();
-      this.island = new Island();
-      this.landscape = new Landscape();
+      // this.island = new Island();
+      // this.landscape = new Landscape();
     });
 
     this.environment = new Environment();

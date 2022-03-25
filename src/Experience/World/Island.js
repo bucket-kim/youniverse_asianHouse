@@ -16,12 +16,13 @@ export default class HouseAssets {
 
   setModel() {
     this.model = this.geometry.scene;
-    this.model.scale.set(0.75, 0.75, 0.75);
+    this.model.scale.set(0.65, 0.65, 0.65);
     this.scene.add(this.model);
 
     this.model.traverse((child) => {
       if (child instanceof THREE.Mesh) {
         child.castShadow = true;
+        child.receiveShadow = true;
       }
       if (child.material instanceof THREE.MeshStandardMaterial) {
         child.material.map = this.texture;

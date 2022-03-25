@@ -8,7 +8,7 @@ export default class Environment {
     this.resources = this.experience.resources;
 
     // this.setSunLight();
-    this.setEnvironmentMap();
+    // this.setEnvironmentMap();
   }
 
   setSunLight() {
@@ -25,9 +25,7 @@ export default class Environment {
     this.environmentMap = {};
     this.environmentMap.intensity = 0.4;
     this.environmentMap.texture = this.resources.items.environmentMapTexture;
-    this.environmentMap.texture.encoding = THREE.sRGBEncoding;
-
-    this.scene.environment = this.environmentMap.texture;
+    // this.environmentMap.texture.encoding = THREE.sRGBEncoding;
     // this.scene.background = this.environmentMap.texture;
 
     this.environmentMap.updateMaterials = () => {
@@ -36,6 +34,7 @@ export default class Environment {
           child instanceof THREE.Mesh &&
           child.material instanceof THREE.MeshStandardMaterial
         ) {
+          child.castShadow = true;
           child.material.envMap = this.environmentMap.texture;
           child.material.envMapIntensity = this.environmentMap.intensity;
           child.material.needsUpdate = true;
@@ -43,5 +42,7 @@ export default class Environment {
       });
     };
     this.environmentMap.updateMaterials();
+
+    this.scene.environment = this.environmentMap.texture;
   }
 }

@@ -1,44 +1,35 @@
 export default [
-  {
-    name: "environmentMapTexture",
-    type: "cubeTexture",
-    path: [
-      "textures/environmentMap2/px.png",
-      "textures/environmentMap2/nx.png",
-      "textures/environmentMap2/py.png",
-      "textures/environmentMap2/ny.png",
-      "textures/environmentMap2/pz.png",
-      "textures/environmentMap2/nz.png",
-    ],
-  },
+  // {
+  //   name: "environmentMapTexture",
+  //   type: "cubeTexture",
+  //   path: [
+  //     "textures/environmentMap2/px.png",
+  //     "textures/environmentMap2/nx.png",
+  //     "textures/environmentMap2/py.png",
+  //     "textures/environmentMap2/ny.png",
+  //     "textures/environmentMap2/pz.png",
+  //     "textures/environmentMap2/nz.png",
+  //   ],
+  // },
   {
     name: "houseAssets",
     type: "gltfModel",
-    path: "models/asianHouseElements.glb",
+    path: "models/set1_geo.glb",
   },
+
   {
-    name: "houseAssetsTexture",
-    type: "texture",
-    path: "textures/modelTexture/houseElementTexture.png",
-  },
-  {
-    name: "island",
+    name: "geometry",
     type: "gltfModel",
-    path: "models/island.glb",
+    path: "models/geometry.glb",
   },
   {
-    name: "islandTexture",
+    name: "bakeSet001",
     type: "texture",
-    path: "textures/modelTexture/islandTexture.png",
+    path: "textures/modelTexture/1.png",
   },
   {
-    name: "landscape",
-    type: "gltfModel",
-    path: "models/landscape.glb",
-  },
-  {
-    name: "landscapeTexture",
+    name: "bakeSet002",
     type: "texture",
-    path: "textures/modelTexture/landscapeTexture.png",
+    path: "textures/modelTexture/2.png",
   },
 ];
