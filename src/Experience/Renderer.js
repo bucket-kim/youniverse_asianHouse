@@ -19,7 +19,7 @@ export default class Renderer {
     });
     this.renderer.physicallyCorrectLights = true;
     // this.renderer.autoClear = false;
-    // this.renderer.outputEncoding = THREE.sRGBEncoding;
+    this.renderer.outputEncoding = THREE.sRGBEncoding;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1;
     this.renderer.shadowMap.enabled = true;

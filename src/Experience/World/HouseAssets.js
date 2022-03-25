@@ -20,6 +20,9 @@ export default class HouseAssets {
     this.model.scale.set(0.65, 0.65, 0.65);
     this.scene.add(this.model);
 
+    this.texture001.encoding = THREE.sRGBEncoding;
+    this.texture002.encoding = THREE.sRGBEncoding;
+
     // material
     this.material = new THREE.MeshBasicMaterial();
 
