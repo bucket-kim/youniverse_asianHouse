@@ -7,11 +7,6 @@ export default [
   {
     name: "bakeSet001",
     type: "texture",
-    path: "textures/modelTexture/1.png",
-  },
-  {
-    name: "bakeSet002",
-    type: "texture",
-    path: "textures/modelTexture/2.png",
+    path: "textures/1.png",
   },
 ];

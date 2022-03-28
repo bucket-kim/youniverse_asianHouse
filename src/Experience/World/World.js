@@ -20,12 +20,12 @@ export default class World {
     // wait for resources
     this.resources.on("ready", () => {
       // setup
-      this.environment = new Environment();
+      // this.environment = new Environment();
       this.houseAssets = new HouseAssets();
       // this.island = new Island();
       // this.landscape = new Landscape();
     });
 
-    this.environment = new Environment();
+    // this.environment = new Environment();
   }
 }

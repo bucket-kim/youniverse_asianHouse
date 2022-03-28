@@ -10,7 +10,6 @@ export default class HouseAssets {
     // setup
     this.mesh = this.resources.items.geometry;
     this.texture001 = this.resources.items.bakeSet001;
-    this.texture002 = this.resources.items.bakeSet002;
 
     this.setModel();
   }
@@ -21,28 +20,17 @@ export default class HouseAssets {
     this.scene.add(this.model);
 
     this.texture001.encoding = THREE.sRGBEncoding;
-    this.texture002.encoding = THREE.sRGBEncoding;
 
     // material
     this.material = new THREE.MeshBasicMaterial();
 
     this.model.traverse((child) => {
       if (child instanceof THREE.Mesh) {
-        if (child.name === "set1_geo") {
-          // material
-          child.material = new THREE.MeshBasicMaterial();
-          child.material.map = this.texture001;
-          child.material.map.flipY = false;
-          child.material.side = THREE.DoubleSide;
-        }
-
-        if (child.name === "set2_geo") {
-          // material
-          child.material = new THREE.MeshBasicMaterial();
-          child.material.map = this.texture002;
-          child.material.map.flipY = false;
-          child.material.side = THREE.DoubleSide;
-        }
+        // material
+        child.material = new THREE.MeshBasicMaterial();
+        child.material.map = this.texture001;
+        child.material.map.flipY = false;
+        child.material.side = THREE.DoubleSide;
       }
     });
   }
