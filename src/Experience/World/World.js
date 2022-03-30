@@ -2,7 +2,7 @@ import * as THREE from "three";
 import Experience from "../Experience";
 import Environment from "./Environment";
 import HouseAssets from "./HouseAssets";
-import Island from "./Island.js";
+import Water from "./Water.js";
 import Landscape from "./Landscape.js";
 
 export default class World {
@@ -22,7 +22,7 @@ export default class World {
       // setup
       // this.environment = new Environment();
       this.houseAssets = new HouseAssets();
-      // this.island = new Island();
+      this.water = new Water();
       // this.landscape = new Landscape();
     });
 

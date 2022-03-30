@@ -5,8 +5,13 @@ export default [
     path: "models/geometry.glb",
   },
   {
+    name: "water",
+    type: "gltfModel",
+    path: "models/water.glb",
+  },
+  {
     name: "bakeSet001",
     type: "texture",
-    path: "textures/1.png",
+    path: "textures/1.jpg",
   },
 ];
