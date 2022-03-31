@@ -3,7 +3,7 @@ import Experience from "../Experience";
 import Environment from "./Environment";
 import HouseAssets from "./HouseAssets";
 import Water from "./Water.js";
-import Landscape from "./Landscape.js";
+import Fireflies from "./Fireflies.js";
 
 export default class World {
   constructor() {
@@ -23,9 +23,15 @@ export default class World {
       // this.environment = new Environment();
       this.houseAssets = new HouseAssets();
       this.water = new Water();
-      // this.landscape = new Landscape();
+      this.fireflies = new Fireflies();
     });
 
     // this.environment = new Environment();
+  }
+
+  update() {
+    if (this.fireflies) {
+      this.fireflies.update();
+    }
   }
 }

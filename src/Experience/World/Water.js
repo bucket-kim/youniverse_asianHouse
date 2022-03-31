@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import Experience from "../Experience";
+import { Water } from "three/examples/jsm/objects/Water2.js";
 
 export default class HouseAssets {
   constructor() {
@@ -15,19 +16,29 @@ export default class HouseAssets {
   }
 
   setModel() {
-    this.model = this.geometry.scene;
-    this.model.scale.set(0.65, 0.65, 0.65);
-    this.scene.add(this.model);
-
-    this.model.traverse((child) => {
-      if (child instanceof THREE.Mesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-      }
-      if (child.material instanceof THREE.MeshStandardMaterial) {
-        child.material.map = this.texture;
-        child.material.map.flipY = false;
-      }
+    this.waterGeo = new THREE.PlaneGeometry(1.85, 1.85);
+    this.waterGeometry = this.geometry.scene;
+    this.box = new THREE.Box3().setFromObject(this.waterGeometry);
+    this.center = this.box.getCenter(new THREE.Vector3());
+    this.waterGeometry.position.set(
+      this.center.x,
+      this.center.y,
+      this.center.z
+    );
+    this.water = new Water(this.waterGeo, {
+      color: "#ffffff",
+      textureHeight: 1024,
+      textureWidth: 1024,
+      flowDirection: new THREE.Vector2(1, 1),
+      scale: 2,
     });
+
+    this.water.position.y = 0.185;
+    // this.water.scale.set(0.65, 0.65, 0.65);
+    this.water.position.x = 2.25;
+    this.water.position.z = 1.5;
+    this.water.rotation.x = Math.PI * -0.5;
+
+    this.scene.add(this.water);
   }
 }

@@ -12,6 +12,11 @@ export default [
   {
     name: "bakeSet001",
     type: "texture",
-    path: "textures/1.jpg",
+    path: "textures/modelTexture/dayTexture.jpg",
+  },
+  {
+    name: "bakeSet002",
+    type: "texture",
+    path: "textures/modelTexture/nightTexture.jpg",
   },
 ];

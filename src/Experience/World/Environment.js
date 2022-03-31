@@ -8,7 +8,7 @@ export default class Environment {
     this.resources = this.experience.resources;
 
     // this.setSunLight();
-    // this.setEnvironmentMap();
+    this.setEnvironmentMap();
   }
 
   setSunLight() {
