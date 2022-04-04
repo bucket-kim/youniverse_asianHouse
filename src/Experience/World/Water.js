@@ -38,8 +38,6 @@ export default class HouseAssets {
     this.water.scale.set(0.65, 0.65, 0.65);
     this.water.position.set(2.25, -0.05, 1.5);
 
-    console.log(this.water);
-
     this.scene.add(this.water);
   }
 }
