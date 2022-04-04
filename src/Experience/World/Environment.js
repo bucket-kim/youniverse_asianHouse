@@ -7,26 +7,21 @@ export default class Environment {
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
 
-    // this.setSunLight();
+    // this.setAmbientLight();
     this.setEnvironmentMap();
   }
 
-  setSunLight() {
-    this.sunLight = new THREE.DirectionalLight("#ffffff", 2);
-    this.sunLight.castShadow = true;
-    this.sunLight.shadow.camera.far = 15;
-    this.sunLight.shadow.mapSize.set(1024, 1024);
-    this.sunLight.shadow.normalBias = 0.05;
-    this.sunLight.position.set(-1, 1, 2);
-    this.scene.add(this.sunLight);
+  setAmbientLight() {
+    this.ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
+    this.scene.add(this.ambientLight);
   }
 
   setEnvironmentMap() {
     this.environmentMap = {};
     this.environmentMap.intensity = 0.4;
-    this.environmentMap.texture = this.resources.items.environmentMapTexture;
+    this.environmentMap.texture = this.resources.items.dayCubeMap;
     // this.environmentMap.texture.encoding = THREE.sRGBEncoding;
-    // this.scene.background = this.environmentMap.texture;
+    this.scene.background = this.environmentMap.texture;
 
     this.environmentMap.updateMaterials = () => {
       this.scene.traverse((child) => {
@@ -41,7 +36,7 @@ export default class Environment {
         }
       });
     };
-    this.environmentMap.updateMaterials();
+    // this.environmentMap.updateMaterials();
 
     this.scene.environment = this.environmentMap.texture;
   }

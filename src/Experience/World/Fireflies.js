@@ -64,6 +64,6 @@ export default class Fireflies {
   }
 
   update() {
-    this.firefliesMaterial.uniforms.uTime.value = this.time.elapsed;
+    this.firefliesMaterial.uniforms.uTime.value = this.time.elapsed * 0.0005;
   }
 }

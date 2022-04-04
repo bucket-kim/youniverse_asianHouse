@@ -20,13 +20,13 @@ export default class World {
     // wait for resources
     this.resources.on("ready", () => {
       // setup
-      // this.environment = new Environment();
-      this.houseAssets = new HouseAssets();
+      this.environment = new Environment();
       this.water = new Water();
+      this.houseAssets = new HouseAssets();
       this.fireflies = new Fireflies();
     });
 
-    // this.environment = new Environment();
+    this.environment = new Environment();
   }
 
   update() {

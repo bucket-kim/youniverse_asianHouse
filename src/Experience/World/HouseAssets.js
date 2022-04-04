@@ -9,7 +9,7 @@ export default class HouseAssets {
 
     // setup
     this.mesh = this.resources.items.geometry;
-    this.texture001 = this.resources.items.bakeSet002;
+    this.texture001 = this.resources.items.bakeSet001;
     this.alphaMap = this.resources.items.alphaMap;
 
     this.setModel();
@@ -35,7 +35,6 @@ export default class HouseAssets {
         // child.material.alphaMap = this.alphaMap;
         // child.material.alphaMap.flipY = false;
         // child.material.transparent = true;
-        console.log(child.material);
       }
     });
   }

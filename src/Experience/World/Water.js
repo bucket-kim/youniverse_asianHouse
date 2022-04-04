@@ -18,26 +18,27 @@ export default class HouseAssets {
   setModel() {
     this.waterGeo = new THREE.PlaneGeometry(1.85, 1.85);
     this.waterGeometry = this.geometry.scene;
-    this.box = new THREE.Box3().setFromObject(this.waterGeometry);
-    this.center = this.box.getCenter(new THREE.Vector3());
-    this.waterGeometry.position.set(
-      this.center.x,
-      this.center.y,
-      this.center.z
-    );
-    this.water = new Water(this.waterGeo, {
+    this.waterGeometry.scale.set(0.65, 0.65, 0.65);
+    // this.box = new THREE.Box3().setFromObject(this.waterGeometry);
+    // this.center = this.box.getCenter(new THREE.Vector3());
+    // this.waterGeometry.position.set(
+    //   this.center.x,
+    //   this.center.y,
+    //   this.center.z
+    // );
+    this.water = new Water(this.waterGeometry.children[0].geometry, {
       color: "#ffffff",
       textureHeight: 1024,
       textureWidth: 1024,
       flowDirection: new THREE.Vector2(1, 1),
-      scale: 2,
+      scale: 4,
     });
 
-    this.water.position.y = 0.185;
-    // this.water.scale.set(0.65, 0.65, 0.65);
-    this.water.position.x = 2.25;
-    this.water.position.z = 1.5;
-    this.water.rotation.x = Math.PI * -0.5;
+    // this.water.position.y = 0.185;
+    this.water.scale.set(0.65, 0.65, 0.65);
+    this.water.position.set(2.25, -0.05, 1.5);
+
+    console.log(this.water);
 
     this.scene.add(this.water);
   }
