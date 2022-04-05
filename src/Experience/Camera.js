@@ -33,6 +33,11 @@ export default class Camera {
     this.controls.maxAzimuthAngle = Math.PI * 0.5;
     this.controls.minDistance = 5;
     this.controls.maxDistance = 13;
+
+    const minPan = new THREE.Vector3(-2, -2, -2);
+    const max = new THREE.Vector3(2, 2, 2);
+
+    console.log(this.controls);
   }
 
   resize() {

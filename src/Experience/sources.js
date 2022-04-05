@@ -12,6 +12,18 @@ export default [
     ],
   },
   {
+    name: "nightCubeMap",
+    type: "cubeTexture",
+    path: [
+      "textures/nightTextureMap/px.png",
+      "textures/nightTextureMap/nx.png",
+      "textures/nightTextureMap/py.png",
+      "textures/nightTextureMap/ny.png",
+      "textures/nightTextureMap/pz.png",
+      "textures/nightTextureMap/nz.png",
+    ],
+  },
+  {
     name: "geometry",
     type: "gltfModel",
     path: "models/geometry.glb",

@@ -19,7 +19,7 @@ export default class Environment {
   setEnvironmentMap() {
     this.environmentMap = {};
     this.environmentMap.intensity = 0.4;
-    this.environmentMap.texture = this.resources.items.dayCubeMap;
+    this.environmentMap.texture = this.resources.items.nightCubeMap;
     // this.environmentMap.texture.encoding = THREE.sRGBEncoding;
     this.scene.background = this.environmentMap.texture;
 
