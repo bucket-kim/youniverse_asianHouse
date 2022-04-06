@@ -31,12 +31,12 @@ export default class HouseAssets {
       textureHeight: 1024,
       textureWidth: 1024,
       flowDirection: new THREE.Vector2(1, 1),
-      scale: 4,
+      scale: 1,
     });
 
     // this.water.position.y = 0.185;
     this.water.scale.set(0.65, 0.65, 0.65);
-    this.water.position.set(2.25, -0.05, 1.5);
+    // this.water.position.set(2.25, -0.05, 1.5);
 
     this.scene.add(this.water);
   }

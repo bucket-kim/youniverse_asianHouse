@@ -10,7 +10,9 @@ void main()
     vec4 viewPosition = viewMatrix * modelPosition;
     vec4 projectionPosition = projectionMatrix * viewPosition;
 
+    projectionPosition.x += sin(uTime + modelPosition.x * 100.0);
     projectionPosition.y += sin(uTime + modelPosition.x * 100.0);
+    projectionPosition.z += sin(uTime + modelPosition.x * 100.0);
 
     gl_Position = projectionPosition;
     gl_PointSize = uSize * aScale * uPixelRatio;

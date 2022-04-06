@@ -36,8 +36,6 @@ export default class Camera {
 
     const minPan = new THREE.Vector3(-2, -2, -2);
     const max = new THREE.Vector3(2, 2, 2);
-
-    console.log(this.controls);
   }
 
   resize() {

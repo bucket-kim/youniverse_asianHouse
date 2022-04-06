@@ -43,9 +43,9 @@ export default [
     type: "texture",
     path: "textures/modelTexture/nightTexture.jpg",
   },
-  {
-    name: "alphaMap",
-    type: "texture",
-    path: "textures/modelTexture/opacity.jpg",
-  },
+  // {
+  //   name: "alphaMap",
+  //   type: "texture",
+  //   path: "textures/modelTexture/opacity.jpg",
+  // },
 ];

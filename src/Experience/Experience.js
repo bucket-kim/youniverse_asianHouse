@@ -6,6 +6,7 @@ import Renderer from "./Renderer.js";
 import World from "./World/World.js";
 import Resources from "./Utils/Resources.js";
 import sources from "./sources.js";
+import { Pane } from "tweakpane";
 
 let instance = null;
 
@@ -34,6 +35,8 @@ export default class Experience {
     // world setup
     this.world = new World();
 
+    this.setDebug();
+
     // resize event
     this.sizes.on("resize", () => {
       this.resize();
@@ -43,6 +46,11 @@ export default class Experience {
     this.time.on("tick", () => {
       this.update();
     });
+  }
+
+  setDebug() {
+    this.debug = new Pane();
+    this.debug.containerElem_.style.width = "320px";
   }
 
   resize() {

@@ -1,41 +1,74 @@
 import * as THREE from "three";
 import Experience from "../Experience";
+import vertexShader from "../shaders/baked/vertex.glsl";
+import fragmentShader from "../shaders/baked/fragment.glsl";
 
 export default class HouseAssets {
   constructor() {
     this.experience = new Experience();
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
+    this.debug = this.experience.debug;
+
+    if (this.debug) {
+      this.debugFolder = this.debug.addFolder({
+        title: "baked",
+        expanded: true,
+      });
+    }
 
     // setup
     this.mesh = this.resources.items.geometry;
-    this.texture001 = this.resources.items.bakeSet002;
+    this.texture001 = this.resources.items.bakeSet001;
+    this.texture002 = this.resources.items.bakeSet002;
     this.alphaMap = this.resources.items.alphaMap;
 
     this.setModel();
   }
 
   setModel() {
-    this.model = this.mesh.scene;
-    this.model.scale.set(0.65, 0.65, 0.65);
-    this.scene.add(this.model);
+    this.model = {};
+    this.model.mesh = this.mesh.scene;
+    this.model.mesh.scale.set(0.65, 0.65, 0.65);
 
-    this.texture001.encoding = THREE.sRGBEncoding;
+    this.model.dayTexture = this.texture001;
+    // this.model.dayTexture.encoding = THREE.sRGBEncoding;
+    this.model.dayTexture.flipY = false;
 
-    // material
-    this.material = new THREE.MeshBasicMaterial();
+    this.model.nightTexture = this.texture002;
+    // this.model.nightTexture.encoding = THREE.sRGBEncoding;
+    this.model.nightTexture.flipY = false;
 
-    this.model.traverse((child) => {
+    this.model.material = new THREE.ShaderMaterial({
+      uniforms: {
+        uDayTexture: { value: this.model.dayTexture },
+        uNightTexture: { value: this.model.nightTexture },
+
+        uDayNightMix: { value: 0 },
+      },
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+    });
+
+    this.model.mesh.traverse((child) => {
       if (child instanceof THREE.Mesh) {
-        // material
-        child.material = new THREE.MeshBasicMaterial();
-        child.material.map = this.texture001;
-        child.material.map.flipY = false;
+        child.material = this.model.material;
         child.material.side = THREE.DoubleSide;
-        // child.material.alphaMap = this.alphaMap;
-        // child.material.alphaMap.flipY = false;
-        // child.material.transparent = true;
       }
     });
+
+    this.scene.add(this.model.mesh);
+
+    if (this.debug) {
+      this.debugFolder.addInput(
+        this.model.material.uniforms.uDayNightMix,
+        "value",
+        {
+          label: "Day and Night",
+          min: 0,
+          max: 1,
+        }
+      );
+    }
   }
 }
