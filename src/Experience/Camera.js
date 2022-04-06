@@ -34,6 +34,10 @@ export default class Camera {
     this.controls.minDistance = 5;
     this.controls.maxDistance = 13;
 
+    this.controls.screenSpacePanning = true;
+    this.controls.zoomSpeed = 0.25;
+    this.controls.update();
+
     const minPan = new THREE.Vector3(-2, -2, -2);
     const max = new THREE.Vector3(2, 2, 2);
   }

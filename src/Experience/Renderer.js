@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import Experience from "./Experience";
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 
 export default class Renderer {
   constructor() {
@@ -17,13 +19,13 @@ export default class Renderer {
       canvas: this.canvas,
       antialias: true,
     });
-    this.renderer.physicallyCorrectLights = true;
+    // this.renderer.physicallyCorrectLights = true;
     // this.renderer.autoClear = false;
     this.renderer.outputEncoding = THREE.sRGBEncoding;
-    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1;
-    this.renderer.shadowMap.enabled = true;
-    this.renderer.shadowMap.type = THREE.PCFShadowMap;
+    // this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    // this.renderer.toneMappingExposure = 1;
+    // this.renderer.shadowMap.enabled = true;
+    // this.renderer.shadowMap.type = THREE.PCFShadowMap;
     this.renderer.setClearColor(0x010101, 1);
     this.renderer.setSize(this.sizes.width, this.sizes.height);
     this.renderer.setPixelRatio(this.sizes.pixelRatio);
