@@ -44,7 +44,7 @@ export default class HouseAssets {
         uDayTexture: { value: this.model.dayTexture },
         uNightTexture: { value: this.model.nightTexture },
 
-        uDayNightMix: { value: 0 },
+        uDayNightMix: { value: 1 },
       },
       vertexShader: vertexShader,
       fragmentShader: fragmentShader,
