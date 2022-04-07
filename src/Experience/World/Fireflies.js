@@ -34,6 +34,9 @@ export default class Fireflies {
     this.firefliesCount = {};
     this.firefliesCount.value = 50;
 
+    this.firefliesSpeed = {};
+    this.firefliesSpeed.value = 1;
+
     const generate = () => {
       if (this.fireflies !== null) {
         this.firefliesGeometry.dispose();
@@ -86,6 +89,7 @@ export default class Fireflies {
 
     generate();
 
+    // debug generator
     if (this.debug) {
       this.debugFolder.addInput(
         this.firefliesMaterial.uniforms.uSize,
@@ -100,15 +104,40 @@ export default class Fireflies {
       this.debugFolder
         .addInput(this.firefliesCount, "value", {
           label: "counts",
-          max: 1000,
+          max: 500,
           min: 0,
           step: 1.0,
         })
         .on("change", generate);
+      this.debugFolder.addInput(this.firefliesSpeed, "value", {
+        label: "speed",
+        min: 0.1,
+        max: 6,
+        step: 0.01,
+      });
+      this.debugFolder.addInput(this.fireflies.scale, "x", {
+        label: "fireflies x",
+        min: 0.01,
+        max: 3,
+        step: 0.01,
+      });
+      this.debugFolder.addInput(this.fireflies.scale, "y", {
+        label: "fireflies y",
+        min: 0.01,
+        max: 3,
+        step: 0.01,
+      });
+      this.debugFolder.addInput(this.fireflies.scale, "z", {
+        label: "fireflies z",
+        min: 0.01,
+        max: 3,
+        step: 0.01,
+      });
     }
   }
 
   update() {
-    this.firefliesMaterial.uniforms.uTime.value = this.time.elapsed * 0.00025;
+    this.firefliesMaterial.uniforms.uTime.value =
+      this.time.elapsed * 0.00025 * this.firefliesSpeed.value;
   }
 }
