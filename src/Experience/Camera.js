@@ -25,8 +25,8 @@ export default class Camera {
   }
 
   setControls() {
-    const minPan = new THREE.Vector3(-2, -2, -2);
-    const maxPan = new THREE.Vector3(2, 2, 2);
+    const minPan = new THREE.Vector3(-1, -1, -1);
+    const maxPan = new THREE.Vector3(1, 1, 1);
     const _v = new THREE.Vector3();
 
     this.controls = new OrbitControls(this.camera, this.canvas);
@@ -45,11 +45,10 @@ export default class Camera {
     this.controls.addEventListener("change", () => {
       _v.copy(this.controls.target);
       this.controls.target.clamp(minPan, maxPan);
-      // _v.sub(this.controls.target);
-      // this.camera.camera.sub(_v);
-    });
 
-    console.log(this.controls);
+      _v.sub(this.controls.target);
+      this.camera.position.sub(_v);
+    });
   }
 
   resize() {
