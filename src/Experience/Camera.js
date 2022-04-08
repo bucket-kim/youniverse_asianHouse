@@ -25,6 +25,10 @@ export default class Camera {
   }
 
   setControls() {
+    const minPan = new THREE.Vector3(-2, -2, -2);
+    const maxPan = new THREE.Vector3(2, 2, 2);
+    const _v = new THREE.Vector3();
+
     this.controls = new OrbitControls(this.camera, this.canvas);
     this.controls.enableDamping = true;
     this.controls.minPolarAngle = 0;
@@ -38,8 +42,14 @@ export default class Camera {
     this.controls.zoomSpeed = 0.25;
     this.controls.update();
 
-    const minPan = new THREE.Vector3(-2, -2, -2);
-    const max = new THREE.Vector3(2, 2, 2);
+    this.controls.addEventListener("change", () => {
+      _v.copy(this.controls.target);
+      this.controls.target.clamp(minPan, maxPan);
+      // _v.sub(this.controls.target);
+      // this.camera.camera.sub(_v);
+    });
+
+    console.log(this.controls);
   }
 
   resize() {
