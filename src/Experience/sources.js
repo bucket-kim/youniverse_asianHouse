@@ -1,28 +1,28 @@
 export default [
-  {
-    name: "dayCubeMap",
-    type: "cubeTexture",
-    path: [
-      "textures/dayTextureMap/px.png",
-      "textures/dayTextureMap/nx.png",
-      "textures/dayTextureMap/py.png",
-      "textures/dayTextureMap/ny.png",
-      "textures/dayTextureMap/pz.png",
-      "textures/dayTextureMap/nz.png",
-    ],
-  },
-  {
-    name: "nightCubeMap",
-    type: "cubeTexture",
-    path: [
-      "textures/nightTextureMap/px.png",
-      "textures/nightTextureMap/nx.png",
-      "textures/nightTextureMap/py.png",
-      "textures/nightTextureMap/ny.png",
-      "textures/nightTextureMap/pz.png",
-      "textures/nightTextureMap/nz.png",
-    ],
-  },
+  // {
+  //   name: "dayCubeMap",
+  //   type: "cubeTexture",
+  //   path: [
+  //     "textures/dayTextureMap/px.png",
+  //     "textures/dayTextureMap/nx.png",
+  //     "textures/dayTextureMap/py.png",
+  //     "textures/dayTextureMap/ny.png",
+  //     "textures/dayTextureMap/pz.png",
+  //     "textures/dayTextureMap/nz.png",
+  //   ],
+  // },
+  // {
+  //   name: "nightCubeMap",
+  //   type: "cubeTexture",
+  //   path: [
+  //     "textures/nightTextureMap/px.png",
+  //     "textures/nightTextureMap/nx.png",
+  //     "textures/nightTextureMap/py.png",
+  //     "textures/nightTextureMap/ny.png",
+  //     "textures/nightTextureMap/pz.png",
+  //     "textures/nightTextureMap/nz.png",
+  //   ],
+  // },
   {
     name: "geometry",
     type: "gltfModel",
@@ -43,9 +43,14 @@ export default [
     type: "texture",
     path: "textures/modelTexture/nightTexture.jpg",
   },
-  // {
-  //   name: "alphaMap",
-  //   type: "texture",
-  //   path: "textures/modelTexture/opacity.jpg",
-  // },
+  {
+    name: "dayTexture",
+    type: "texture",
+    path: "textures/dayTextureMap/dayTexture.png",
+  },
+  {
+    name: "nightTexture",
+    type: "texture",
+    path: "textures/nightTextureMap/nightTexture.jpg",
+  },
 ];

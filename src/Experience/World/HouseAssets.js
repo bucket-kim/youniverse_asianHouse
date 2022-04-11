@@ -2,6 +2,8 @@ import * as THREE from "three";
 import Experience from "../Experience";
 import vertexShader from "../shaders/baked/vertex.glsl";
 import fragmentShader from "../shaders/baked/fragment.glsl";
+import backgroundVertex from "../shaders/background/vertex.glsl";
+import backgroundFragment from "../shaders/background/fragment.glsl";
 
 export default class HouseAssets {
   constructor() {
@@ -12,7 +14,7 @@ export default class HouseAssets {
 
     if (this.debug) {
       this.debugFolder = this.debug.addFolder({
-        title: "baked",
+        title: "House Texture",
         expanded: true,
       });
     }
@@ -21,7 +23,6 @@ export default class HouseAssets {
     this.mesh = this.resources.items.geometry;
     this.texture001 = this.resources.items.bakeSet001;
     this.texture002 = this.resources.items.bakeSet002;
-    this.alphaMap = this.resources.items.alphaMap;
 
     this.setModel();
   }

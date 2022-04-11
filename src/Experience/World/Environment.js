@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import Experience from "../Experience";
+import vertexShader from "../shaders/background/vertex.glsl";
+import fragmentShader from "../shaders/background/fragment.glsl";
 
 export default class Environment {
   constructor() {
@@ -8,36 +10,61 @@ export default class Environment {
     this.resources = this.experience.resources;
     this.debug = this.experience.debug;
 
-    // this.setAmbientLight();
-    this.setEnvironmentMap();
-  }
-
-  setAmbientLight() {
-    this.ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
-    this.scene.add(this.ambientLight);
-  }
-
-  setEnvironmentMap() {
-    this.environmentMap = {};
-    this.environmentMap.texture = this.resources.items.nightCubeMap;
-    // this.environmentMap.texture.encoding = THREE.sRGBEncoding;
-    this.scene.background = this.environmentMap.texture;
-
-    this.environmentMap.updateMaterials = () => {
-      this.scene.traverse((child) => {
-        if (
-          child instanceof THREE.Mesh &&
-          child.material instanceof THREE.MeshStandardMaterial
-        ) {
-          child.castShadow = true;
-          child.material.envMap = this.environmentMap.texture;
-          child.material.envMapIntensity = this.environmentMap.intensity;
-          child.material.needsUpdate = true;
-        }
+    if (this.debug) {
+      this.debugFolder = this.debug.addFolder({
+        title: "Background",
+        expanded: true,
       });
-    };
-    // this.environmentMap.updateMaterials();
+    }
+    console.log(this.debugFolder);
 
-    this.scene.environment = this.environmentMap.texture;
+    // this.setAmbientLight();
+    this.setBackground();
+  }
+
+  setBackground() {
+    this.environmentMap = {};
+    this.environmentMap.dayTexture = this.resources.items.dayTexture;
+    this.environmentMap.nightTexture = this.resources.items.nightTexture;
+    this.environmentMap.material = new THREE.ShaderMaterial({
+      uniforms: {
+        uDayTexture: { value: this.environmentMap.dayTexture },
+        uNightTexture: { value: this.environmentMap.nightTexture },
+        uDayNightMix: { value: 1 },
+      },
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+    });
+
+    this.model = {};
+    this.model.sphere = new THREE.SphereGeometry(15, 32, 16);
+
+    this.model.mesh = new THREE.Mesh(
+      this.model.sphere,
+      this.environmentMap.material
+    );
+
+    let temp;
+    for (let i = 0; i < this.model.sphere.index.array.length; i += 3) {
+      temp = this.model.sphere.index.array[i];
+      this.model.sphere.index.array[i] = this.model.sphere.index.array[i + 2];
+      this.model.sphere.index.array[i + 2] = temp;
+    }
+
+    this.model.mesh.rotation.y = Math.PI;
+
+    this.scene.add(this.model.mesh);
+
+    if (this.debug) {
+      this.debugFolder.addInput(
+        this.environmentMap.material.uniforms.uDayNightMix,
+        "value",
+        {
+          label: "Background",
+          min: 0,
+          max: 1,
+        }
+      );
+    }
   }
 }
