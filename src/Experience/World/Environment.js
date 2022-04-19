@@ -16,7 +16,6 @@ export default class Environment {
         expanded: true,
       });
     }
-    console.log(this.debugFolder);
 
     // this.setAmbientLight();
     this.setBackground();

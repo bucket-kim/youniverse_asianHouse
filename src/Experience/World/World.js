@@ -33,5 +33,8 @@ export default class World {
     if (this.fireflies) {
       this.fireflies.update();
     }
+    if (this.water) {
+      this.water.update();
+    }
   }
 }

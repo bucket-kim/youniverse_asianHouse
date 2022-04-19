@@ -53,4 +53,9 @@ export default [
     type: "texture",
     path: "textures/nightTextureMap/nightTexture.jpg",
   },
+  {
+    name: "waterNormalTexture",
+    type: "texture",
+    path: "textures/water/Water_1_M_Normal.jpg",
+  },
 ];
