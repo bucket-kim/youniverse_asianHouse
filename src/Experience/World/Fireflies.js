@@ -15,7 +15,7 @@ export default class Fireflies {
     if (this.debug) {
       this.debugFolder = this.debug.addFolder({
         title: "Fireflies",
-        expanded: true,
+        expanded: false,
       });
     }
 

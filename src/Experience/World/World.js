@@ -21,8 +21,8 @@ export default class World {
     this.resources.on("ready", () => {
       // setup
       this.environment = new Environment();
-      this.water = new Water();
       this.houseAssets = new HouseAssets();
+      this.water = new Water();
       this.fireflies = new Fireflies();
     });
 

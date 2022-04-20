@@ -17,23 +17,46 @@ export default class Environment {
       });
     }
 
-    // this.setAmbientLight();
+    // this.setEnvironment();
     this.setBackground();
+  }
+
+  setEnvironment() {
+    this.environment = {};
+    this.environment.nightTexture = this.resources.items.nightCubeMap;
+    this.environment.dayTexture = this.resources.items.dayCubeMap;
+
+    this.scene.rotation.y = Math.PI * 0.6;
+
+    this.environment.updateMaterials = () => {
+      this.scene.traverse((child) => {
+        // console.log(child);
+      });
+    };
+
+    this.scene.background = this.environment.nightTexture;
+
+    this.environment.updateMaterials();
   }
 
   setBackground() {
     this.environmentMap = {};
+
     this.environmentMap.dayTexture = this.resources.items.dayTexture;
+
     this.environmentMap.nightTexture = this.resources.items.nightTexture;
+
     this.environmentMap.material = new THREE.ShaderMaterial({
       uniforms: {
         uDayTexture: { value: this.environmentMap.dayTexture },
         uNightTexture: { value: this.environmentMap.nightTexture },
-        uDayNightMix: { value: 1 },
+        uDayNightMix: { value: true },
       },
       vertexShader: vertexShader,
       fragmentShader: fragmentShader,
     });
+
+    this.environmentMap;
 
     this.model = {};
     this.model.sphere = new THREE.SphereGeometry(15, 32, 16);
@@ -59,9 +82,7 @@ export default class Environment {
         this.environmentMap.material.uniforms.uDayNightMix,
         "value",
         {
-          label: "Background",
-          min: 0,
-          max: 1,
+          label: "Day and Night switch",
         }
       );
     }
