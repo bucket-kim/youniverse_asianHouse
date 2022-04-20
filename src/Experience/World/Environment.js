@@ -1,7 +1,9 @@
 import * as THREE from "three";
 import Experience from "../Experience";
-import vertexShader from "../shaders/background/vertex.glsl";
-import fragmentShader from "../shaders/background/fragment.glsl";
+import backgroundVertexShader from "../shaders/background/vertex.glsl";
+import backgroundFragmentShader from "../shaders/background/fragment.glsl";
+import vertexShader from "../shaders/baked/vertex.glsl";
+import fragmentShader from "../shaders/baked/fragment.glsl";
 
 export default class Environment {
   constructor() {
@@ -52,14 +54,14 @@ export default class Environment {
         uNightTexture: { value: this.environmentMap.nightTexture },
         uDayNightMix: { value: true },
       },
-      vertexShader: vertexShader,
-      fragmentShader: fragmentShader,
+      vertexShader: backgroundVertexShader,
+      fragmentShader: backgroundFragmentShader,
     });
 
-    this.environmentMap;
+    // this.environmentMap;
 
     this.model = {};
-    this.model.sphere = new THREE.SphereGeometry(15, 32, 16);
+    this.model.sphere = new THREE.SphereGeometry(20, 32, 16);
 
     this.model.mesh = new THREE.Mesh(
       this.model.sphere,
@@ -73,7 +75,8 @@ export default class Environment {
       this.model.sphere.index.array[i + 2] = temp;
     }
 
-    this.model.mesh.rotation.y = Math.PI;
+    this.model.mesh.rotation.y = Math.PI * -1.05;
+    this.model.mesh.position.y = 2.5;
 
     this.scene.add(this.model.mesh);
 

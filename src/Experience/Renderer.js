@@ -27,6 +27,8 @@ export default class Renderer {
     // this.renderer.shadowMap.enabled = true;
     // this.renderer.shadowMap.type = THREE.PCFShadowMap;
     this.renderer.setClearColor(0x010101, 1);
+    this.renderer.autoClear = false;
+    this.renderer.clear();
     this.renderer.setSize(this.sizes.width, this.sizes.height);
     this.renderer.setPixelRatio(this.sizes.pixelRatio);
   }

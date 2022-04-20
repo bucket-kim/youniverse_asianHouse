@@ -2,8 +2,6 @@ import * as THREE from "three";
 import Experience from "../Experience";
 import vertexShader from "../shaders/baked/vertex.glsl";
 import fragmentShader from "../shaders/baked/fragment.glsl";
-import backgroundVertex from "../shaders/background/vertex.glsl";
-import backgroundFragment from "../shaders/background/fragment.glsl";
 
 export default class HouseAssets {
   constructor() {
