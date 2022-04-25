@@ -2,8 +2,6 @@ import * as THREE from "three";
 import Experience from "../Experience";
 import backgroundVertexShader from "../shaders/background/vertex.glsl";
 import backgroundFragmentShader from "../shaders/background/fragment.glsl";
-import vertexShader from "../shaders/baked/vertex.glsl";
-import fragmentShader from "../shaders/baked/fragment.glsl";
 
 export default class Environment {
   constructor() {
@@ -20,7 +18,55 @@ export default class Environment {
     }
 
     // this.setEnvironment();
-    this.setBackground();
+    // this.setBackground();
+    this.test();
+  }
+
+  test() {
+    const geo = new THREE.BoxBufferGeometry(100, 100, 100);
+    const texture = new THREE.CubeTextureLoader().load([
+      "textures/nightTextureMap/px.jpg",
+      "textures/nightTextureMap/nx.jpg",
+      "textures/nightTextureMap/py.jpg",
+      "textures/nightTextureMap/ny.jpg",
+      "textures/nightTextureMap/pz.jpg",
+      "textures/nightTextureMap/nz.jpg",
+    ]);
+
+    // texture.encoding = THREE.LinearEncoding;
+
+    const mat = new THREE.ShaderMaterial({
+      side: THREE.BackSide,
+      uniforms: {
+        cubemap: {
+          value: texture,
+        },
+      },
+      vertexShader: `
+      varying vec3 vWorldPosition;
+
+      void main() {
+        vec4 worldPosition = modelMatrix * vec4(position, 1.0);
+        vWorldPosition = vec3(-worldPosition.z, worldPosition.y, -worldPosition.x);
+      
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+      `,
+      fragmentShader: `
+      uniform samplerCube cubemap;
+      varying vec3 vWorldPosition;
+      
+      void main(){
+        vec3 normalizedVWorldPosition = normalize(vWorldPosition);
+        vec3 outcolor = textureCube(cubemap, normalizedVWorldPosition).rgb;
+      
+        gl_FragColor = vec4(outcolor, 1.0);
+      }
+      `,
+    });
+
+    const mesh = new THREE.Mesh(geo, mat);
+    this.scene.add(mesh);
   }
 
   setEnvironment() {
@@ -30,15 +76,7 @@ export default class Environment {
 
     this.scene.rotation.y = Math.PI * 0.6;
 
-    this.environment.updateMaterials = () => {
-      this.scene.traverse((child) => {
-        // console.log(child);
-      });
-    };
-
     this.scene.background = this.environment.nightTexture;
-
-    this.environment.updateMaterials();
   }
 
   setBackground() {
@@ -56,27 +94,30 @@ export default class Environment {
       },
       vertexShader: backgroundVertexShader,
       fragmentShader: backgroundFragmentShader,
+      side: THREE.BackSide,
+      depthWrite: false,
     });
-
-    // this.environmentMap;
 
     this.model = {};
     this.model.sphere = new THREE.SphereGeometry(20, 32, 16);
+    // this.model.cube = new THREE.BoxBufferGeometry(100, 100, 100);
 
     this.model.mesh = new THREE.Mesh(
       this.model.sphere,
       this.environmentMap.material
     );
 
-    let temp;
-    for (let i = 0; i < this.model.sphere.index.array.length; i += 3) {
-      temp = this.model.sphere.index.array[i];
-      this.model.sphere.index.array[i] = this.model.sphere.index.array[i + 2];
-      this.model.sphere.index.array[i + 2] = temp;
-    }
+    // let temp;
+    // for (let i = 0; i < this.model.cube.index.array.length; i += 3) {
+    //   temp = this.model.cube.index.array[i];
+    //   this.model.cube.index.array[i] = this.model.cube.index.array[i + 2];
+    //   this.model.cube.index.array[i + 2] = temp;
+    // }
 
     this.model.mesh.rotation.y = Math.PI * -1.05;
     this.model.mesh.position.y = 2.5;
+
+    console.log(this.environmentMap.dayTexture);
 
     this.scene.add(this.model.mesh);
 
