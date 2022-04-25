@@ -18,8 +18,8 @@ export default class Environment {
     }
 
     // this.setEnvironment();
-    // this.setBackground();
-    this.test();
+    this.setBackground();
+    // this.test();
   }
 
   test() {
