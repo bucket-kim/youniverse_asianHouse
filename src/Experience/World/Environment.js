@@ -19,12 +19,11 @@ export default class Environment {
 
     // this.setEnvironment();
     this.setBackground();
-    // this.test();
   }
 
-  test() {
-    const geo = new THREE.BoxBufferGeometry(100, 100, 100);
-    const texture = new THREE.CubeTextureLoader().load([
+  setEnvironment() {
+    this.environment = {};
+    this.environment.nightTexture = new THREE.CubeTextureLoader().load([
       "textures/nightTextureMap/px.jpg",
       "textures/nightTextureMap/nx.jpg",
       "textures/nightTextureMap/py.jpg",
@@ -33,45 +32,8 @@ export default class Environment {
       "textures/nightTextureMap/nz.jpg",
     ]);
 
-    // texture.encoding = THREE.LinearEncoding;
+    this.environment.nightTexture.encoding = THREE.sRGBEncoding;
 
-    const mat = new THREE.ShaderMaterial({
-      side: THREE.BackSide,
-      uniforms: {
-        cubemap: {
-          value: texture,
-        },
-      },
-      vertexShader: `
-      varying vec3 vWorldPosition;
-
-      void main() {
-        vec4 worldPosition = modelMatrix * vec4(position, 1.0);
-        vWorldPosition = vec3(-worldPosition.z, worldPosition.y, -worldPosition.x);
-      
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }
-      `,
-      fragmentShader: `
-      uniform samplerCube cubemap;
-      varying vec3 vWorldPosition;
-      
-      void main(){
-        vec3 normalizedVWorldPosition = normalize(vWorldPosition);
-        vec3 outcolor = textureCube(cubemap, normalizedVWorldPosition).rgb;
-      
-        gl_FragColor = vec4(outcolor, 1.0);
-      }
-      `,
-    });
-
-    const mesh = new THREE.Mesh(geo, mat);
-    this.scene.add(mesh);
-  }
-
-  setEnvironment() {
-    this.environment = {};
-    this.environment.nightTexture = this.resources.items.nightCubeMap;
     this.environment.dayTexture = this.resources.items.dayCubeMap;
 
     this.scene.rotation.y = Math.PI * 0.6;
@@ -82,9 +44,26 @@ export default class Environment {
   setBackground() {
     this.environmentMap = {};
 
-    this.environmentMap.dayTexture = this.resources.items.dayTexture;
+    // this.environmentMap.dayTexture = this.resources.items.dayTexture;
+    this.environmentMap.dayTexture = new THREE.CubeTextureLoader().load([
+      "textures/dayTextureMap/px.jpg",
+      "textures/dayTextureMap/nx.jpg",
+      "textures/dayTextureMap/py.jpg",
+      "textures/dayTextureMap/ny.jpg",
+      "textures/dayTextureMap/pz.jpg",
+      "textures/dayTextureMap/nz.jpg",
+    ]);
 
-    this.environmentMap.nightTexture = this.resources.items.nightTexture;
+    // this.environmentMap.nightTexture = this.resources.items.nightTexture;
+
+    this.environmentMap.nightTexture = new THREE.CubeTextureLoader().load([
+      "textures/nightTextureMap/px.jpg",
+      "textures/nightTextureMap/nx.jpg",
+      "textures/nightTextureMap/py.jpg",
+      "textures/nightTextureMap/ny.jpg",
+      "textures/nightTextureMap/pz.jpg",
+      "textures/nightTextureMap/nz.jpg",
+    ]);
 
     this.environmentMap.material = new THREE.ShaderMaterial({
       uniforms: {
@@ -99,11 +78,11 @@ export default class Environment {
     });
 
     this.model = {};
-    this.model.sphere = new THREE.SphereGeometry(20, 32, 16);
-    // this.model.cube = new THREE.BoxBufferGeometry(100, 100, 100);
+    // this.model.sphere = new THREE.SphereGeometry(40, 32, 16);
+    this.model.cube = new THREE.BoxGeometry(100, 100, 100);
 
     this.model.mesh = new THREE.Mesh(
-      this.model.sphere,
+      this.model.cube,
       this.environmentMap.material
     );
 
@@ -114,10 +93,8 @@ export default class Environment {
     //   this.model.cube.index.array[i + 2] = temp;
     // }
 
-    this.model.mesh.rotation.y = Math.PI * -1.05;
-    this.model.mesh.position.y = 2.5;
-
-    console.log(this.environmentMap.dayTexture);
+    this.model.mesh.rotation.y = Math.PI * 1.1;
+    this.model.mesh.position.y = 5;
 
     this.scene.add(this.model.mesh);
 
